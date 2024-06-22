@@ -17,6 +17,15 @@ export interface IUser {
   createdAt?: string;
   updatedAt?: string;
   authorities?: IAuthority[];
+  role?: IRole;
+}
+
+export interface IRole {
+  id?: number;
+  description?: string;
+  name?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface IAuthority {
@@ -34,7 +43,7 @@ export enum IFeedbackStatus {
   default = ''
 }
 
-export enum IRole {
+export enum IRoleType {
   admin = "ROLE_ADMIN",
   user = "ROLE_USER",
   superAdmin = 'ROLE_SUPER_ADMIN'
