@@ -10,6 +10,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { GuestGuard } from './guards/guest.guard';
 import { IRoleType } from './interfaces';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { GamesComponent } from './pages/games/games.component';
 
 export const routes: Routes = [
   {
@@ -50,6 +51,7 @@ export const routes: Routes = [
             IRoleType.admin, 
             IRoleType.superAdmin
           ],
+          showInSidebar: true,
           name: 'Users'
         }
       },
@@ -62,6 +64,7 @@ export const routes: Routes = [
             IRoleType.superAdmin,
             IRoleType.user
           ],
+          showInSidebar: true,
           name: 'Dashboard'
         }
       },
@@ -74,7 +77,21 @@ export const routes: Routes = [
             IRoleType.superAdmin,
             IRoleType.user
           ],
+          showInSidebar: false,
           name: 'profile'
+        }
+      },
+      {
+        path: 'games',
+        component: GamesComponent,
+        data: { 
+          authorities: [
+            IRoleType.admin, 
+            IRoleType.superAdmin,
+            IRoleType.user
+          ],
+          showInSidebar: true,
+          name: 'games'
         }
       }
     ],

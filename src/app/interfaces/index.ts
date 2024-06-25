@@ -48,3 +48,13 @@ export enum IRoleType {
   user = "ROLE_USER",
   superAdmin = 'ROLE_SUPER_ADMIN'
 }
+
+export interface IGame {
+  id?: number;
+  description?: string;
+  name?: string;
+  imgURL?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  status?: string;
+}
