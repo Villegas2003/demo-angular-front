@@ -15,15 +15,21 @@ import { GameFormComponent } from '../../components/game/game-form/game-form.com
     LoaderComponent,
     CommonModule,
     ModalComponent,
+    GameFormComponent
   ],
   templateUrl: './games.component.html',
   styleUrl: './games.component.scss'
 })
 export class GamesComponent{
-  public service = inject(GameService);
+  public gameService: GameService = inject(GameService);
+
 
   constructor() {
-    this.service.getAll();
+    this.gameService.getAll();
+  }
+
+  handleFormAction(item: IGame) {
+    this.gameService.save(item);
   }
 
 

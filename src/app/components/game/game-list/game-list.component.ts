@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { IGame } from '../../../interfaces';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../modal/modal.component';
 import { GameFormComponent } from '../game-form/game-form.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { GameService } from '../../../services/game.service';
 
 @Component({
   selector: 'app-game-list',
@@ -19,11 +20,19 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class GameListComponent {
   @Input() itemList: IGame[] = [];
   public selectedItem: IGame = {};
+  public gameService: GameService = inject(GameService);
 
-  showDetail(item: IGame, modal: any){
-    console.log('Detail item', item);
-    this.selectedItem = item;
+  showDetailModal(item: IGame, modal: any) {
+    this.selectedItem = {...item}
     modal.show();
+  }
+
+  handleFormAction(item: IGame) {
+    this.gameService.update(item);
+  }
+
+  deleteGame(item: IGame) {
+    this.gameService.delete(item);
   }
 
 }

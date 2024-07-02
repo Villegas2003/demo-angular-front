@@ -27,8 +27,18 @@
               >{{item.status}}</p>
             </td>
             <td>
-              <button type="button" (click)="showDetail(item, detailModal)" class="btn btn-secondary">
+              <button 
+                type="button" 
+                (click)="showDetailModal(item, detailModal)"
+                class="btn btn-secondary me-3">
                 <i class="fa-solid fa-eye white"
+                ></i>
+              </button>
+              <button 
+                type="button"
+                (click)="deleteGame(item);" 
+                class="btn btn-danger">
+                <i class="fa-solid fa-trash white"
                 ></i>
               </button>
             </td>
@@ -45,6 +55,8 @@
 
 <app-modal #detailModal>
   <app-game-form
-  [item]="selectedItem"
+    [game]="selectedItem"
+    [action]="'Update game'"
+    (callParentEvent)="handleFormAction($event)"
   />
 </app-modal>

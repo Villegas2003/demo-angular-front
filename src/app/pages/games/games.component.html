@@ -5,16 +5,27 @@
   <div>
     @defer {
       <div class="d-flex justify-content-end pb-2">
-        <button type="button" class="btn btn-primary d-flex align-items-center">
+        <button
+          (click)="addModal.show()" 
+          type="button" 
+          class="btn btn-primary d-flex align-items-center">
           <i class="fa-solid fa-plus white"></i>
           <p class="mb-0">Add game</p>
         </button>
       </div>
       <app-game-list
-      [itemList]="service.items$()"
+      [itemList]="gameService.items$()"
       />
     } @loading (after 100ms; minimum 1s){
       <app-loader></app-loader>
     }
   </div>
 </div>
+
+<app-modal #addModal>
+  <app-game-form
+    [action]="'Add game'"
+    (callParentEvent)="handleFormAction($event)" 
+  />
+</app-modal>
+
