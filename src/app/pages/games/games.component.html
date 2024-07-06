@@ -14,6 +14,7 @@
         </button>
       </div>
       <app-game-list
+      [areActionsAvailable]="areActionsAvailable"
       [itemList]="gameService.items$()"
       />
     } @loading (after 100ms; minimum 1s){
