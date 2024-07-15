@@ -1,28 +1,28 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { GamesFormComponent } from '../../components/game/games-form/games-form.component';
-import { GamesListComponent } from '../../components/game/games-list/games-list.component';
-import { LoaderComponent } from '../../components/loader/loader.component';
+import { CategoriasFormComponent } from '../../components/categoria/categorias-form/categorias-form.component';
+import { CategoriasListComponent } from "../../components/categoria/categorias-list/categorias-list.component";
+import { LoaderComponent } from "../../components/loader/loader.component";
 import { ModalComponent } from '../../components/modal/modal.component';
-import { IGame } from '../../interfaces';
+import { ICategoria } from '../../interfaces';
 import { AuthService } from '../../services/auth.service';
-import { GameService } from '../../services/game.service';
+import { CategoriaService } from '../../services/categoria.service';
 
 @Component({
-  selector: 'app-games',
+  selector: 'app-categorias',
   standalone: true,
   imports: [
     LoaderComponent,
-    GamesListComponent,
+    CategoriasListComponent,
     ModalComponent,
-    GamesFormComponent
-    ],
-  templateUrl: './games.component.html',
-  styleUrl: './games.component.scss'
+    CategoriasFormComponent
+  ],
+  templateUrl: './categorias.component.html',
+  styleUrls: ['./categorias.component.scss']
 })
-export class GamesComponent implements OnInit{
-  public gameService: GameService = inject(GameService);
+export class CategoriasComponent implements OnInit {
+  public categoriaService: CategoriaService = inject(CategoriaService);
   public modalService: NgbModal = inject(NgbModal);
   public route: ActivatedRoute = inject(ActivatedRoute);
   public authService: AuthService = inject(AuthService);
@@ -31,15 +31,15 @@ export class GamesComponent implements OnInit{
 
   ngOnInit(): void {
     this.authService.getUserAuthorities();
-    this.gameService.getAll();
-    this.route.data.subscribe( data => {
+    this.categoriaService.getAll();
+    this.route.data.subscribe(data => {
       this.routeAuthorities = data['authorities'] ? data['authorities'] : [];
       this.areActionsAvailable = this.authService.areActionsAvailable(this.routeAuthorities);
     });
   }
 
-  onFormEventCalled (params: IGame) {
-    this.gameService.save(params);
+  onFormEventCalled(params: ICategoria) {
+    this.categoriaService.save(params);
     this.modalService.dismissAll();
   }
 }

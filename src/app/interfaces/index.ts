@@ -58,3 +58,21 @@ export interface IGame {
   createdAt?: string,
   updatedAt?: string
 }
+export interface IProducto {
+  id?: number
+  cantidadEnStock?: string,
+  createdAt?: string,
+  descripcion?: string,
+  nombre?: string,
+  precio?: string,
+  updatedAt?: string,
+  categoriaId?: number
+}
+
+export interface ICategoria {
+  id?: number
+  createdAt?: string,
+  descripcion?: string,
+  nombre?: string,
+  updatedAt?: string,
+}

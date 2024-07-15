@@ -1,28 +1,28 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { GamesFormComponent } from '../../components/game/games-form/games-form.component';
-import { GamesListComponent } from '../../components/game/games-list/games-list.component';
-import { LoaderComponent } from '../../components/loader/loader.component';
+import { LoaderComponent } from "../../components/loader/loader.component";
 import { ModalComponent } from '../../components/modal/modal.component';
-import { IGame } from '../../interfaces';
+import { ProductosFormComponent } from '../../components/producto/productos-form/productos-form.component';
+import { ProductosListComponent } from "../../components/producto/productos-list/productos-list.component";
+import { IProducto } from '../../interfaces';
 import { AuthService } from '../../services/auth.service';
-import { GameService } from '../../services/game.service';
+import { ProductoService } from '../../services/producto.service';
 
 @Component({
-  selector: 'app-games',
+  selector: 'app-productos',
   standalone: true,
   imports: [
     LoaderComponent,
-    GamesListComponent,
+    ProductosListComponent,
     ModalComponent,
-    GamesFormComponent
+    ProductosFormComponent
     ],
-  templateUrl: './games.component.html',
-  styleUrl: './games.component.scss'
+  templateUrl: './productos.component.html',
+  styleUrls: ['./productos.component.scss']
 })
-export class GamesComponent implements OnInit{
-  public gameService: GameService = inject(GameService);
+export class ProductosComponent implements OnInit {
+  public productoService: ProductoService = inject(ProductoService);
   public modalService: NgbModal = inject(NgbModal);
   public route: ActivatedRoute = inject(ActivatedRoute);
   public authService: AuthService = inject(AuthService);
@@ -31,15 +31,15 @@ export class GamesComponent implements OnInit{
 
   ngOnInit(): void {
     this.authService.getUserAuthorities();
-    this.gameService.getAll();
-    this.route.data.subscribe( data => {
+    this.productoService.getAll();
+    this.route.data.subscribe(data => {
       this.routeAuthorities = data['authorities'] ? data['authorities'] : [];
       this.areActionsAvailable = this.authService.areActionsAvailable(this.routeAuthorities);
     });
   }
 
-  onFormEventCalled (params: IGame) {
-    this.gameService.save(params);
+  onFormEventCalled(params: IProducto) {
+    this.productoService.save(params);
     this.modalService.dismissAll();
   }
 }

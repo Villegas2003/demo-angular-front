@@ -1,16 +1,18 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/auth/login/login.component';
 import { AppLayoutComponent } from './components/app-layout/app-layout.component';
-import { SigUpComponent } from './pages/auth/sign-up/signup.component';
-import { UsersComponent } from './pages/users/users.component';
-import { AuthGuard } from './guards/auth.guard';
-import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
 import { AdminRoleGuard } from './guards/admin-role.guard';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AuthGuard } from './guards/auth.guard';
 import { GuestGuard } from './guards/guest.guard';
 import { IRoleType } from './interfaces';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { SigUpComponent } from './pages/auth/sign-up/signup.component';
+import { CategoriasComponent } from './pages/categorias/categorias.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { GamesComponent } from './pages/games/games.component';
+import { ProductosComponent } from './pages/productos/productos.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { UsersComponent } from './pages/users/users.component';
 
 export const routes: Routes = [
   {
@@ -65,7 +67,7 @@ export const routes: Routes = [
             IRoleType.user
           ],
           name: 'Dashboard',
-          showInSidebar: true
+          showInSidebar: false
         }
       },
       {
@@ -91,6 +93,32 @@ export const routes: Routes = [
             IRoleType.user,
           ],
           name: 'games',
+          showInSidebar: false
+        }
+      },
+      {
+        path: 'productos',
+        component: ProductosComponent,
+        data: { 
+          authorities: [
+            IRoleType.admin, 
+            IRoleType.superAdmin,
+            IRoleType.user
+          ],
+          name: 'productos',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'Categoria',
+        component: CategoriasComponent,
+        data: {
+          authorities: [
+            IRoleType.admin,
+            IRoleType.superAdmin,
+            IRoleType.user
+          ],
+          name: 'categorias',
           showInSidebar: true
         }
       }
